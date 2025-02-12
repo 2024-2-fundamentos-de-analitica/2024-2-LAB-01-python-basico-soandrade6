@@ -5,6 +5,7 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+import csv
 
 def pregunta_07():
     """
@@ -25,3 +26,11 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        groups = {}
+        for row in csv.reader(file, delimiter="\t"):
+            key = int(row[1])
+            groups.setdefault(key, []).append(row[0])
+
+        return sorted(groups.items())
+    

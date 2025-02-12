@@ -4,7 +4,7 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+import csv
 
 def pregunta_09():
     """
@@ -24,3 +24,14 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        counts = {}
+        for row in csv.reader(file, delimiter="\t"):
+            for pair in row[4].split(","):
+                key = pair.split(":")[0]
+                counts[key] = counts.get(key, 0) + 1  
+
+        return dict(sorted(counts.items()))
+    
+
